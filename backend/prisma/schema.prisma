@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  price       Float
+  stock       Int
+  description String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  categoryId Int
+  createdBy     Int
+  category   Category   @relation(fields: [categoryId], references: [id])
+  user       User       @relation(fields: [createdBy], references: [id])
+
+  salesProduct SalesProduct[]
+  logistics Logistics[]
+
+}
+
+model Logistics {
+  id        Int      @id @default(autoincrement())
+  address   String
+  city      String
+  state     String
+  zipCode   String
+  country   String
+  productId Int      
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product   Product  @relation(fields: [productId], references: [id]) 
+
+}
+
+model Sales {
+  id          Int      @id @default(autoincrement())
+  totalPrice  Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  salesProduct SalesProduct[]
+
+}
+
+model SalesProduct {
+  id         Int     @id @default(autoincrement())
+  saleId     Int
+  productId  Int
+  quantity   Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  sale       Sales    @relation(fields: [saleId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+}
+
+enum ChartType {
+  line
+  bar
+  pie
+  box
+}
+
+model Chart {
+  id        Int      @id @default(autoincrement())
+  endpoint  String   
+  title     String
+  type      ChartType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

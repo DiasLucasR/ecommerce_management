@@ -1,0 +1,32 @@
+# Node modules
+/node_modules/
+
+# TypeScript
+/dist/
+/build/
+/*.tsbuildinfo
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+/.vscode/
+/.idea/
+
+# Jest test coverage
+/coverage/
+
+# npm package-lock
+package-lock.json
+
+# TypeScript specific files
+tsconfig.tsbuildinfo
+
+yarn.lock

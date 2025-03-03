@@ -1,0 +1,114 @@
+# Fluxograma e Atividades por Fase
+
+## Fase 1: Identificação de Necessidades
+1. **Levantamento de Requisitos**: Identificar as necessidades do cliente e stakeholders.
+   - Quais dados serão centralizados?
+   - Qual será o objetivo principal da solução?
+   - Identificar as fontes de dados (e.g., banco de dados existente, APIs, arquivos desestruturados).
+2. **Definição de Escopo**: Documentar quais funcionalidades serão desenvolvidas.
+   - API para ingestão e transformação de dados.
+   - Interface de visualização de insights e gráficos.
+   - Criação de Data Apps para interação.
+3. **Análise de Riscos**: Identificar possíveis desafios e riscos técnicos.
+   - Integração de fontes heterogêneas.
+   - Performance com grandes volumes de dados.
+
+---
+
+## Fase 2: Planejamento
+1. **Escolha das Stacks**:
+   - **Backend**: Node.js (Express) ou Flask, PostgreSQL/MySQL, Python para IA.
+   - **Frontend**: React com Tailwind CSS ou Streamlit.
+   - **Infraestrutura**: Docker para containerização, Docker Compose, CI/CD com GitHub Actions.
+2. **Criação do Artefato de Planejamento**:
+   - Criar um Kanban ou Gantt para organizar tarefas.
+   - Definir milestones semanais.
+3. **Alocação de Recursos**:
+   - Backend e Frontend Devs.
+   - Cientista de Dados (se aplicável).
+
+---
+
+## Fase 3: Configuração de Ambiente
+1. **Setup do Ambiente de Desenvolvimento**:
+   - Instalar e configurar Docker.
+   - Configurar imagens base (Node.js, Python, PostgreSQL).
+   - Criar Docker Compose para orquestração.
+2. **Criação do Repositório**:
+   - Criar estrutura inicial no GitHub com pastas para `/backend`, `/frontend`, `/docs` e `/scripts`.
+3. **Configuração de CI/CD**:
+   - Configurar pipeline inicial (build, testes e deploy).
+
+---
+
+## Fase 4: Desenvolvimento do Backend
+1. **Modelagem de Dados**:
+   - Criar diagramas ER e gerar scripts de criação de tabelas SQL.
+   - Popular com dados sintéticos (~100.000 registros).
+2. **Desenvolvimento da API**:
+   - Criar endpoints RESTful para ingestão e transformação de dados.
+   - Implementar princípios SOLID e design patterns (Repository, Service).
+   - Documentar endpoints com Swagger ou Postman.
+3. **Pipeline de Transformação de Dados**:
+   - Integrar GPT ou outra IA para extração de features relevantes.
+   - Testar e validar resultados com dados de exemplo.
+
+---
+
+## Fase 5: Desenvolvimento do Frontend
+1. **Criação de Protótipos de Interface**:
+   - Esboçar protótipos iniciais (wireframes).
+   - Validar protótipos com stakeholders.
+2. **Desenvolvimento da Interface**:
+   - Criar componentes em React ou Streamlit.
+   - Integrar com a API do backend.
+   - Implementar responsividade e interatividade (ex.: gráficos).
+3. **Visualizações de Dados**:
+   - Criar 5 gráficos dinâmicos utilizando bibliotecas como Recharts ou Highcharts.
+   - Validar insights com usuários finais.
+
+---
+
+## Fase 6: Integração e Testes
+1. **Testes de Integração**:
+   - Garantir comunicação eficaz entre API e frontend.
+   - Validar pipelines de transformação de dados.
+2. **Testes Unitários e Funcionais**:
+   - Cobertura mínima de 80% no backend.
+   - Testar componentes e interações no frontend.
+3. **Testes de Performance**:
+   - Validar ingestão e transformação com grandes volumes de dados.
+
+---
+
+## Fase 7: Deploy
+1. **Configuração de Produção**:
+   - Preparar ambiente de produção com Docker.
+   - Configurar banco de dados em cloud (AWS RDS, Heroku Postgres).
+   - Configurar monitoramento (e.g., Prometheus, Grafana).
+2. **Pipeline de Deploy**:
+   - Automação com CI/CD para build, teste e deploy em produção.
+3. **Entrega e Validação**:
+   - Validar funcionalidade completa com stakeholders.
+
+---
+
+## Fase 8: Apresentação e Documentação Final
+1. **Documentação**:
+   - Criar README detalhado no GitHub.
+   - Adicionar instruções de execução e screenshots.
+2. **Gravação do Vídeo**:
+   - Explicar a solução em vídeo e subir no YouTube (Unlisted).
+3. **Entrega Final**:
+   - Compartilhar repositório e links necessários.
+
+---
+
+## Fase 9: Bônus e Melhorias
+1. **Inovações**:
+   - Gerador de imagens com DALL-E para visualização de produtos.
+   - Implementar dashboards extras (Power BI, Tableau).
+2. **Refinamentos**:
+   - Melhorar UX do frontend.
+   - Otimizar pipelines de dados para maior escalabilidade.
+
