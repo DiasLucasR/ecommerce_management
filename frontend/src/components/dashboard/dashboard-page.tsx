@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import ChartService from "@/service/chartService"
 import { Chart } from "@/types/chartTypes"
 import ChartsRender from "../chart-render/chart-render"
+import { AwaitedComponent } from "../awaited-component/awaited-componenent"
 
 export function DashboardPage() {
   const [charts , setCharts] = useState([])
@@ -18,9 +19,8 @@ export function DashboardPage() {
   useEffect(() => {
     ChartService.getChartsAll().then(res => {
       if(Array.isArray(res)){
-        res.forEach(chart => {
-          getExpecificChart(chart);
-        })
+        console.log(res)
+        setCharts(res)
       }
     }).catch(err => {
       console.log(err)
@@ -28,27 +28,19 @@ export function DashboardPage() {
   }, [])
 
 
-  function getExpecificChart(chart : Chart){
-    ChartService.getChartsByEndpoint(chart.endpoint).then(res => {
-      setCharts(prev => [
-        ...prev,
-        {
-          title: chart.title,
-          type: chart.type,
-          content: res
-        }
-      ]);
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+
+   
 
   return (
     <div className="grid  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
-    {charts?.map((chart, index) => (
+    {charts && charts?.map((chart, index) => (
       <Card key={`chart-${index}`}>
-        <CardContent>
-          <ChartsRender chart={chart} />
+        <CardContent className="">
+        <AwaitedComponent resolve={ChartService.getChartsByEndpoint(chart.endpoint)}>
+          {(data) => 
+           <ChartsRender chart={chart}  content={data}/>
+          }
+        </AwaitedComponent>
         </CardContent>
       </Card>
     ))}

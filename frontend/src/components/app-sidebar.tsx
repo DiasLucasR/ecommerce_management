@@ -40,11 +40,6 @@ export function AppSidebar() {
       icon: Search,
       href: "/data-explorer",
     },
-    {
-      title: "Product Visualization",
-      icon: Image,
-      href: "/product",
-    },
   ]
 
   return (

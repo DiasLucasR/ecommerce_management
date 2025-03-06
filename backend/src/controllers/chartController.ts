@@ -32,11 +32,7 @@ export const getAllCharts = async (req: Request, res: Response) => {
           ORDER BY title;
         `);
     
-        res.json({
-          title: "Quarterly Revenue Growth",
-          type: "box",
-         content: result
-        });
+        res.json(result);
 
       } catch (error) {
         res.status(500).json({ error: error });
@@ -101,14 +97,25 @@ export const averageTicket = async (req: Request, res: Response): Promise<void> 
 export const topSellingProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await prisma.$queryRaw`
-      SELECT p.name, p.stock, SUM(sp.quantity) AS demand
-      FROM SalesProduct sp
-      JOIN Product p ON sp.productId = p.id
-      GROUP BY p.name, p.stock
-      ORDER BY demand DESC;
-    `;
+    SELECT p.name, p.stock, SUM(sp.quantity) AS demand
+    FROM SalesProduct sp
+    JOIN Product p ON sp.productId = p.id
+    GROUP BY p.name, p.stock
+    ORDER BY demand DESC
+    LIMIT 10;
+  `;
+  
+    if(Array.isArray(result)){
+      res.json(result?.map(chart => ({
+        value: chart.stock,
+        value2: chart.demand,
+        title: chart.name
+      })));
+    }else{
+      res.json([])
+    }
 
-    res.json(result);
+  
   } catch (error) {
     res.status(500).json({ error: error });
   }

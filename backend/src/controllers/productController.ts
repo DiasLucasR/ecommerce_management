@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import Product from '../models/productModel';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -12,10 +15,19 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
 };
 
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
+
   try {
-    const products = await Product.find().populate('category');
+
+    const page = 1;
+    const pageSize = 10; 
+
+    const products = await prisma.product.findMany({
+      skip: (page - 1) * pageSize,
+      take: pageSize});
     res.status(200).json(products);
-  } catch (err) {
-    res.status(500).json({ error: (err as Error).message });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  } finally {
+    await prisma.$disconnect(); 
   }
 };

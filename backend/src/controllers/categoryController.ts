@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import Category from '../models/categoryModel';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const createCategory = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -13,9 +16,17 @@ export const createCategory = async (req: Request, res: Response): Promise<void>
 
 export const getCategories = async (req: Request, res: Response): Promise<void> => {
   try {
-    const categories = await Category.find();
+
+    const page = 1;
+    const pageSize = 10; 
+
+    const categories = await prisma.category.findMany({
+      skip: (page - 1) * pageSize,
+      take: pageSize});
     res.status(200).json(categories);
-  } catch (err) {
-    res.status(500).json({ error: (err as Error).message });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  } finally {
+    await prisma.$disconnect(); 
   }
 };

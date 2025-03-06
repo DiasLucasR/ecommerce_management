@@ -1,46 +1,68 @@
 import { useTheme } from 'next-themes'; // Import the useTheme hook from next-themes
 import React, { useEffect, useState } from 'react';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+
 import { Chart } from '@/types/chartTypes';
+import { DashboardStats } from '../dash-stats/dash-stats';
+import { Bar, BarChart, CartesianGrid, LabelList, Legend, Line, LineChart, Rectangle, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Tooltip } from '../ui/tooltip';
 
 
 interface ChartsRenderProps {
   chart: Chart;
+  content: any[]
 }
-const ChartsRender: React.FC<ChartsRenderProps> = ({ chart }) => {
-  const { theme } = useTheme(); // Access the current theme (dark or light)
 
-  if(chart.type == 'box'){
-    return <h2 className='text-black'>{chart.title}</h2>
+interface RenderProps{
+  chart: Chart;
+  content: any[]
+}
+
+export function Render({ chart, content }: RenderProps) {
+
+  console.log("chart", chart)
+  console.log("content", content)
+
+  switch (chart.endpoint) {
+    case 'revenue':
+      return <></>
+      break;
+    case 'sales-by-product-category':
+      return <></>
+      break;
+    case 'sales-by-region':
+      return <></>
+      break;
+    case 'average-ticket':
+      return <></>
+      break;
+    case 'top-products':
+      return <></>
+      break;
+    case 'stock-duration':
+      return <></>
+      break;
+    case 'customer-recurrence':
+      return <></>
+      break;
+    case 'quarterly-revenue':
+      return <></>
+      break;
+
+    default:
+      break;
   }
 
-  console.log(chart.title, chart.type, chart.content)
 
-  const options: Highcharts.Options = {
-    title: {
-      text: chart.title,
-    },
-    chart: {
-      type: chart.type as Highcharts.ChartType,
-      backgroundColor: theme === 'dark' ? '#2b2b2b' : '#ffffff', // Dark or light background
-    },
-    colors: theme === 'dark'
-      ? ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9'] // Dark mode colors
-      : ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9'], // Light mode colors
-    series: [
-      {
-        data: chart.content, 
-      },
-    ],
-    plotOptions: {
-      series: {
-        color: theme === 'dark' ? '#f1f1f1' : '#000000', // Text color for dark/light mode
-      },
-    },
-  };
+}
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+const ChartsRender: React.FC<ChartsRenderProps> = ({ chart, content }) => {
+
+
+
+  const { theme } = useTheme(); // Access the current theme (dark or light)
+
+  return <Render chart={chart} content={content} />
+
 };
 
 export default ChartsRender;

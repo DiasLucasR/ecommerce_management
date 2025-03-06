@@ -8,6 +8,7 @@ import productRoutes from './routes/productRoutes';
 import categoryRoutes from './routes/categoryRoutes';
 import logisticsRoutes from './routes/logisticsRoutes';
 import chartsRoutes from './routes/chartsRoutes';
+import salesRoutes from './routes/salesRoutes';
 
 import swaggerJSDoc from 'swagger-jsdoc';
 import { swaggerOptions } from './utils/swaggerOptions';
@@ -32,6 +33,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/logistics', logisticsRoutes);
 app.use('/api/charts', chartsRoutes);
+app.use('/api/sales', salesRoutes);
 
 // Rota inicial para verificar se o servidor está funcionando
 app.get('/', (req: Request, res: Response) => {
